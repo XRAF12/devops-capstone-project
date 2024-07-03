@@ -47,7 +47,6 @@ class TestAccount(unittest.TestCase):
     def test_create_an_account(self):
         """It should Create an Account and assert that it exists"""
         fake_account = AccountFactory()
-        # pylint: disable=unexpected-keyword-arg
         account = Account(
             name=fake_account.name,
             email=fake_account.email,
@@ -123,7 +122,7 @@ class TestAccount(unittest.TestCase):
         self.assertEqual(accounts, [])
         for account in AccountFactory.create_batch(5):
             account.create()
-        # Assert that there are not 5 accounts in the database
+        # Assert that there are 5 accounts in the database
         accounts = Account.all()
         self.assertEqual(len(accounts), 5)
 
@@ -169,7 +168,6 @@ class TestAccount(unittest.TestCase):
         """It should not Deserialize an account with a TypeError"""
         account = Account()
         self.assertRaises(DataValidationError, account.deserialize, [])
-
 
 if __name__ == "__main__":
     unittest.main()
